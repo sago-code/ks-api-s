@@ -21,8 +21,11 @@ export class User extends BaseEntity {
     @Column()
     password: string;
 
-    @Column({unique: true})
+    @Column({unique: true, type: 'bigint'})
     phone: number;
+
+    @Column({nullable: true})
+    photo: string;
 
     @CreateDateColumn()
     createdAt: Date;

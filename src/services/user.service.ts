@@ -2,7 +2,7 @@ import { AppDataSource } from '../db/db';
 import bcrypt from 'bcryptjs';
 
 export class UserService {
-    async createUser(firstName: string, lastName: string, age: number, email: string, password: string, phone: number): Promise<void> {
+    async createUser(firstName: string, lastName: string, age: number, email: string, password: string, phone: number, photo: string | null): Promise<void> {
         const queryRunner = AppDataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
@@ -11,8 +11,8 @@ export class UserService {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             await queryRunner.manager.query(
-                'CALL create_user(?, ?, ?, ?, ?, ?)',
-                [firstName, lastName, age, email, hashedPassword, phone],
+                'CALL create_user($1, $2, $3, $4, $5, $6, $7)',
+                [firstName, lastName, age, email, hashedPassword, phone, photo],
             );
             await queryRunner.commitTransaction();
         } catch (error) {
