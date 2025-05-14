@@ -110,5 +110,5 @@ export const AppDataSource = new DataSource
 })
 ```
 ## Autores
-Santiago Orjuela Vera
-Jua Sebastian Palomino
+Santiago Orjuela Vera,
+Juan Sebastian Palomino
