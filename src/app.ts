@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import userRoutes from "./routes/user.routes";
 import { AppDataSource } from "./db/db";
+import { Rol } from "./entities/Rol.entity";
 
 export class App {
 
@@ -32,6 +33,7 @@ export class App {
 
     async listen() {
         await AppDataSource.initialize();
+        await Rol.createInitialRoles();
         await this.app.listen(this.app.get('port'));
         const port = this.app.get('port');
         console.log(chalk.blue.bold(`
@@ -39,7 +41,7 @@ export class App {
             *                                        *
             *      Bienvenido a Kabod-Style API S    *
             *                                        *
-            * `) + chalk.green.bold(`    🚀 Servidor en puerto: ${port} 🚀            `) + chalk.blue.bold(`*
+            * `) + chalk.green.bold(`    🚀 Servidor en puerto: ${port} 🚀     `) + chalk.blue.bold(`*
             *                                        *
             ******************************************`
         ));

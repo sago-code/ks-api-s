@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToOne, JoinColumn } from 'typeorm';
+import { Rol } from './Rol.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -26,6 +27,13 @@ export class User extends BaseEntity {
 
     @Column({nullable: true})
     photo: string;
+    
+    @Column()
+    rolId: number;
+    
+    @ManyToOne(() => Rol)
+    @JoinColumn({ name: 'rolId' })
+    rol: Rol;
 
     @CreateDateColumn()
     createdAt: Date;
