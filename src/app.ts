@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoutes from "./routes/user.routes";
 import { AppDataSource } from "./db/db";
 import { Rol } from "./entities/Rol.entity";
+import authRoutes from "./routes/auth.routes";
 
 export class App {
 
@@ -29,6 +30,7 @@ export class App {
 
     routes() {
         this.app.use('/users', userRoutes);
+        this.app.use('/auth', authRoutes);
     }
 
     async listen() {

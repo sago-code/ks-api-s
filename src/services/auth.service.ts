@@ -5,7 +5,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = 'kabod-style-secret-key';
-const JWT_EXPIRES_IN = '24h';
 
 export class AuthService {
     async login(email: string, password: string): Promise<{ user: Partial<User>, token: string }> {
@@ -34,8 +33,7 @@ export class AuthService {
                 rolId: user.rolId,
                 rolName: user.rol.name
             }, 
-            JWT_SECRET, 
-            { expiresIn: JWT_EXPIRES_IN }
+            JWT_SECRET,
         );
         
         const userToken = new UserAccessToken();
